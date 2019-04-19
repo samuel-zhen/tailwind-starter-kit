@@ -1,8 +1,11 @@
 const gulp = require('gulp');
 const postcss = require('gulp-postcss');
 const sourcemaps = require('gulp-sourcemaps');
+const babel = require('gulp-babel');
+const concat = require('gulp-concat');
+const uglify = require('gulp-uglify');
 
-function build() {
+function styles() {
     return gulp.src('src/css/*.css')
         .pipe(sourcemaps.init())
         .pipe(postcss())
@@ -10,9 +13,23 @@ function build() {
         .pipe(gulp.dest('dist/css/'));
 }
 
-function serve() {
-    gulp.watch('src/css/**/*.css', build);
+function scripts() {
+    return gulp.src('src/js/*.js')
+        .pipe(sourcemaps.init())
+        .pipe(babel({
+			presets: ['babel-preset-env']
+		}))
+        .pipe(concat('script.js'))
+        .pipe(uglify())
+		.pipe(sourcemaps.write('.'))
+        .pipe(gulp.dest('dist/js/'));
 }
 
-exports.serve = serve;
-exports.build = build;
+function watch() {
+    gulp.watch('src/js/*.js', scripts);
+    gulp.watch('src/css/**/*.css', styles);
+    gulp.watch('tailwind.config.js', styles);
+}
+
+exports.watch = watch;
+exports.build = gulp.parallel(styles, scripts);

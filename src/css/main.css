@@ -2,7 +2,4 @@
 
 @tailwind components;
 
-/* Components */
-@import "components/button.css";
-
 @tailwind utilities;
