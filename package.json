@@ -1,0 +1,16 @@
+{
+  "name": "tailwind-starter-kit",
+  "version": "1.0.0",
+  "description": "A starter kit for web development with tailwind CSS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "tailwindcss",
+    "css",
+    "html"
+  ],
+  "author": "Samuel",
+  "license": "ISC"
+}
